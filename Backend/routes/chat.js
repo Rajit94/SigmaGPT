@@ -18,4 +18,16 @@ router.post("/test", async(req, res) => {
     }
 });
 
+//get all threads
+router.get("/thread", async(req, res) => {
+    try {
+        const threads = await Thread.find({}).sort({ updatedAt:-1});
+        //descending order of updatedAt... most recent chat on top 
+        res.json(threads);
+    } catch(err) {
+        console.log(err);
+        res.status(500).json({error: "failed to fetch threads"});
+    }
+});
+
 export default router;
