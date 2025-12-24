@@ -30,8 +30,6 @@ router.get("/thread", async(req, res) => {
     }
 });
 
-<<<<<<< HEAD
-=======
 router.get("/thread/:threadId", async(req, res) => {
     const {threadId} = req.params;
 
@@ -67,5 +65,4 @@ router.delete("/thread/:threadId", async(req, res) => {
     }
 });
 
->>>>>>> 15050952548da678b0b60aa804447bc1db84a543
 export default router;
