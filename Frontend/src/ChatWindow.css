@@ -72,7 +72,7 @@ input {
 input:focus {
     outline: none;
 }
-
+ 
 #submit {
     cursor: pointer;
     height: 35px;
