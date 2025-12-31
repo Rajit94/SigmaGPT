@@ -10,14 +10,14 @@
     font-size: 0.9rem;
 }
 
-
 .gptDiv {
     text-align: left;
     font-size: 0.9rem;
 }
 
 .userMessage {
-    background-color: #323232;
+    background-color: var(--input-bg);
+    color: var(--text-primary);
     padding: 10px 20px;
     border-radius: 14px;
     margin-left: 15rem;
@@ -25,10 +25,26 @@
     width: fit-content;
 }
 
+.gptMessage {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    padding: 10px 20px;
+    border-radius: 14px;
+    margin-right: 15rem;
+    max-width: 500px;
+    width: fit-content;
+}
+
 .hljs {
     border-radius: 14px !important;
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
 }
 
 pre {
     white-space: pre-wrap;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    padding: 10px;
+    border-radius: 8px;
 }

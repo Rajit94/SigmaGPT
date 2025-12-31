@@ -1,14 +1,36 @@
+/* CSS Variables for themes */
+.app {
+  --bg-primary: #212121;        /* Dark: main app bg */
+  --bg-secondary: #424242;      /* Dark: sidebar/chat bg */
+  --text-primary: #ececec;      /* Dark: main text */
+  --text-secondary: #b0b0b0;    /* Dark: secondary text */
+  --input-bg: #303030;          /* Dark: input field */
+  --border-color: #616161;      /* Dark: borders */
+}
+
+.app.light {
+  --bg-primary: #f8f9fa;        /* Light: main app bg */
+  --bg-secondary: #ffffff;      /* Light: sidebar/chat bg */
+  --text-primary: #1a1a1a;      /* Light: main text */
+  --text-secondary: #666666;    /* Light: secondary text */
+  --input-bg: #ffffff;          /* Light: input field */
+  --border-color: #e0e0e0;      /* Light: borders */
+}
+
 * {
-  color: #ececec;
+  color: var(--text-primary);
   font-family: Roboto, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 body {
   margin: 0;
   padding: 0;
+  background-color: var(--bg-primary);
 }
 
 .app {
-  background-color: #212121;
+  background-color: var(--bg-primary);
   display: flex;
+  min-height: 100vh;
 }
+
