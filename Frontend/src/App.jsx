@@ -15,7 +15,7 @@ function App() {
   
   // 🌙 Theme state - DEFAULT DARK
   const [isLightTheme, setIsLightTheme] = useState(false);
-
+  
   // ✅ FIXED: Toggle theme function (stable with useCallback)
   const toggleTheme = useCallback(() => {
     const newTheme = !isLightTheme;
