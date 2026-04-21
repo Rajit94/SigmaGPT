@@ -21,7 +21,9 @@ export function AuthProvider({ children }) {
   const [isSignUp, setIsSignUp] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem('sigmaGPT-token');
+    // Always start from auth screen on a fresh app load.
+    sessionStorage.removeItem('sigmaGPT-token');
+    const token = sessionStorage.getItem('sigmaGPT-token');
     if (token) {
       verifyToken(token);
     } else {
@@ -39,7 +41,7 @@ export function AuthProvider({ children }) {
       setAuthModalOpen(false);
     } catch (err) {
       console.error('Token verification failed:', err);
-      localStorage.removeItem('sigmaGPT-token');
+      sessionStorage.removeItem('sigmaGPT-token');
       setAuthModalOpen(true);
     } finally {
       setLoading(false);
@@ -53,7 +55,7 @@ export function AuthProvider({ children }) {
         email, 
         password 
       });
-      localStorage.setItem('sigmaGPT-token', res.data.token);
+      sessionStorage.setItem('sigmaGPT-token', res.data.token);
       setUser(res.data.user);
       setAuthModalOpen(false);
       setLoading(false);
@@ -75,7 +77,7 @@ export function AuthProvider({ children }) {
         password, 
         name 
       });
-      localStorage.setItem('sigmaGPT-token', res.data.token);
+      sessionStorage.setItem('sigmaGPT-token', res.data.token);
       setUser(res.data.user);
       setAuthModalOpen(false);
       setLoading(false);
@@ -90,7 +92,7 @@ export function AuthProvider({ children }) {
   };
 
   const logout = () => {
-    localStorage.removeItem('sigmaGPT-token');
+    sessionStorage.removeItem('sigmaGPT-token');
     setUser(null);
     setAuthModalOpen(true);
     setIsSignUp(false);

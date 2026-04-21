@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useAuth } from './AuthContext.jsx';
+import { useAuth } from './AuthContext';
 import './AuthModal.css';
 
 function AuthModal() {
@@ -64,10 +64,10 @@ function AuthModal() {
           <form 
             className="auth-form signin-form" 
             onSubmit={handleSubmit}
-            style={{ display: isSignUp ? 'none' : 'flex' }}
           >
-            <h1>Welcome Back</h1>
-            <p>Sign in to continue to SigmaGPT</p>
+            <span className="auth-brand">SigmaGPT</span>
+            <h1>Welcome back</h1>
+            <p>Sign in to continue your conversations.</p>
             
             <input
               type="email"
@@ -103,10 +103,11 @@ function AuthModal() {
           <form 
             className="auth-form signup-form" 
             onSubmit={handleSubmit}
-            style={{ display: isSignUp ? 'flex' : 'none' }}
+  
           >
-            <h1>Create Account</h1>
-            <p>Join SigmaGPT today</p>
+            <span className="auth-brand">SigmaGPT</span>
+            <h1>Create your account</h1>
+            <p>Get started with a smarter workspace.</p>
             
             <input
               type="text"
@@ -152,16 +153,16 @@ function AuthModal() {
             <div className="overlay-content">
               {!isSignUp ? (
                 <>
-                  <h1>Hello, Friend!</h1>
-                  <p>Enter your personal details and start your journey with SigmaGPT</p>
+                  <h1>New here?</h1>
+                  <p>Create your account to save chats and continue across devices.</p>
                   <button className="ghost-btn" onClick={() => handleToggle(true)} type="button">
                     Sign Up
                   </button>
                 </>
               ) : (
                 <>
-                  <h1>Welcome Back!</h1>
-                  <p>To keep connected with us please login with your personal info</p>
+                  <h1>Welcome back</h1>
+                  <p>Sign in to pick up right where you left off.</p>
                   <button className="ghost-btn" onClick={() => handleToggle(false)} type="button">
                     Sign In
                   </button>

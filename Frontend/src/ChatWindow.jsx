@@ -3,9 +3,11 @@ import Chat from "./Chat.jsx";
 import { MyContext } from "./MyContext.jsx";
 import { useContext, useState, useEffect } from "react";
 import {ScaleLoader} from "react-spinners";
+import { useAuth } from "./AuthContext.jsx";
 
 function ChatWindow() {
     const {prompt, setPrompt, reply, setReply, currThreadId, setPrevChats, setNewChat} = useContext(MyContext);
+    const { user, logout } = useAuth();
     const [loading, setLoading] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
 
@@ -54,25 +56,60 @@ function ChatWindow() {
     }, [reply]);
 
 
-    const handleProfileClick = () => {
-        setIsOpen(!isOpen);
-    }
+    const handleProfileClick = () => setIsOpen(!isOpen);
+
+    const handleLogout = () => {
+        logout();
+        setIsOpen(false);
+    };
+
+    const getUserInitial = () => {
+        if (!user?.name) return "U";
+        return user.name.charAt(0).toUpperCase();
+    };
 
     return (
         <div className="chatWindow">
             <div className="navbar">
                 <span>SigmaGPT <i className="fa-solid fa-chevron-down"></i></span>
-                <div className="userIconDiv" onClick={handleProfileClick}>
-                    <span className="userIcon"><i className="fa-solid fa-user"></i></span>
+                <div className="userIconDiv">
+                    <button type="button" className="userIcon" onClick={handleProfileClick}>
+                        {getUserInitial()}
+                    </button>
                 </div>
             </div>
             {
-                isOpen && 
-                <div className="dropDown">
-                    <div className="dropDownItem"><i class="fa-solid fa-gear"></i> Settings</div>
-                    <div className="dropDownItem"><i class="fa-solid fa-cloud-arrow-up"></i> Upgrade plan</div>
-                    <div className="dropDownItem"><i class="fa-solid fa-arrow-right-from-bracket"></i> Log out</div>
-                </div>
+                isOpen &&
+                <>
+                    <div className="dropDownOverlay" onClick={() => setIsOpen(false)}></div>
+                    <div className="dropDown">
+                        <div className="dropDownHeader">
+                            <p>{user?.name || "User"}</p>
+                            <span>{user?.email || "user@sigmagpt.ai"}</span>
+                        </div>
+                        <div className="dropDownItem disabled" aria-disabled="true">
+                            <i className="fa-solid fa-gear"></i>
+                            <div>
+                                <p>Settings</p>
+                                <span>Preferences coming soon</span>
+                            </div>
+                        </div>
+                        <div className="dropDownItem disabled" aria-disabled="true">
+                            <i className="fa-solid fa-cloud-arrow-up"></i>
+                            <div>
+                                <p>Upgrade plan</p>
+                                <span>Pro features preview</span>
+                            </div>
+                        </div>
+                        <div className="dropDownItem logout" onClick={handleLogout}>
+                            <i className="fa-solid fa-arrow-right-from-bracket"></i>
+                            <div>
+                                <p>Log out</p>
+                                <span>End current session</span>
+                            </div>
+                        </div>
+                    </div>
+                </>
             }
             <Chat></Chat>
 
