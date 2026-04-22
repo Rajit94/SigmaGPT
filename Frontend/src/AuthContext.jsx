@@ -1,10 +1,10 @@
-/* eslint-disable react-refresh/only-export-components */
+
 import { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from './config.js';
 
 const AuthContext = createContext();
 
-// MUST export this function
 export function useAuth() {
   const context = useContext(AuthContext);
   if (!context) {
@@ -13,7 +13,7 @@ export function useAuth() {
   return context;
 }
 
-// MUST export this function
+
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -21,7 +21,7 @@ export function AuthProvider({ children }) {
   const [isSignUp, setIsSignUp] = useState(false);
 
   useEffect(() => {
-    // Always start from auth screen on a fresh app load.
+    
     sessionStorage.removeItem('sigmaGPT-token');
     const token = sessionStorage.getItem('sigmaGPT-token');
     if (token) {
@@ -34,7 +34,7 @@ export function AuthProvider({ children }) {
 
   const verifyToken = async (token) => {
     try {
-      const res = await axios.get('http://localhost:8080/api/auth/verify', {
+      const res = await axios.get(`${API_BASE_URL}/api/auth/verify`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setUser(res.data.user);
@@ -51,7 +51,7 @@ export function AuthProvider({ children }) {
   const login = async (email, password) => {
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:8080/api/auth/login', { 
+      const res = await axios.post(`${API_BASE_URL}/api/auth/login`, { 
         email, 
         password 
       });
@@ -72,7 +72,7 @@ export function AuthProvider({ children }) {
   const register = async (email, password, name) => {
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:8080/api/auth/register', { 
+      const res = await axios.post(`${API_BASE_URL}/api/auth/register`, { 
         email, 
         password, 
         name 

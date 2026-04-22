@@ -2,13 +2,14 @@ import "./Sidebar.css";
 import { useContext, useEffect } from "react";
 import { MyContext } from "./MyContext.jsx";
 import { v1 as uuidv1 } from "uuid";
+import { API_BASE_URL } from "./config.js";
 
 function Sidebar() {
     const { allThreads, setAllThreads, currThreadId, setNewChat, setPrompt, setReply, setCurrThreadId, setPrevChats } = useContext(MyContext);
 
     const getAllThreads = async () => {
         try {
-            const response = await fetch("http://localhost:8080/api/thread");
+            const response = await fetch(`${API_BASE_URL}/api/thread`);
             const res = await response.json();
             const filteredData = res.map(thread => ({ threadId: thread.threadId, title: thread.title }));
             setAllThreads(filteredData);
@@ -33,7 +34,7 @@ function Sidebar() {
         setCurrThreadId(newThreadId);
 
         try {
-            const response = await fetch(`http://localhost:8080/api/thread/${newThreadId}`);
+            const response = await fetch(`${API_BASE_URL}/api/thread/${newThreadId}`);
             const res = await response.json();
             console.log(res);
             setPrevChats(res);
@@ -46,11 +47,11 @@ function Sidebar() {
 
     const deleteThread = async (threadId) => {
         try {
-            const response = await fetch(`http://localhost:8080/api/thread/${threadId}`, { method: "DELETE" });
+            const response = await fetch(`${API_BASE_URL}/api/thread/${threadId}`, { method: "DELETE" });
             const res = await response.json();
             console.log(res);
 
-            // Updated threads re-render
+        
             setAllThreads(prev => prev.filter(thread => thread.threadId !== threadId));
 
             if (threadId === currThreadId) {

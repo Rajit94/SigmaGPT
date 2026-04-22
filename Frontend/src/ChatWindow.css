@@ -9,7 +9,7 @@
     text-align: center;
 }
 
-/* navbar */
+
 
 .navbar {
     width: 100%;
@@ -52,7 +52,7 @@
     filter: brightness(1.05);
 }
 
-/* chat input */
+
 .chatInput {
     width: 100%;
     display: flex;
@@ -110,7 +110,7 @@ input:focus {
     color: #b4b4b4;
 }
 
-/* dropdown css */
+
 
 .dropDown {
     position: absolute;

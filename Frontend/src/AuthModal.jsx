@@ -13,7 +13,7 @@ function AuthModal() {
     setError('');
     setIsSubmitting(true);
 
-    // Validation
+    
     if (isSignUp && !formData.name.trim()) {
       setError('Name is required');
       setIsSubmitting(false);
@@ -49,7 +49,7 @@ function AuthModal() {
     setIsSubmitting(false);
   };
 
-  // FIXED: Reset form when toggling - moved to handler function
+
   const handleToggle = (signUpMode) => {
     setIsSignUp(signUpMode);
     setFormData({ email: '', password: '', name: '' });
@@ -60,7 +60,7 @@ function AuthModal() {
     <div className="auth-overlay">
       <div className="auth-card">
         <div className={`auth-container ${isSignUp ? 'signup-active' : 'signin-active'}`}>
-          {/* SIGN IN FORM */}
+          { }
           <form 
             className="auth-form signin-form" 
             onSubmit={handleSubmit}
@@ -99,7 +99,7 @@ function AuthModal() {
             </div>
           </form>
 
-          {/* SIGN UP FORM */}
+          {}
           <form 
             className="auth-form signup-form" 
             onSubmit={handleSubmit}
@@ -148,7 +148,7 @@ function AuthModal() {
             </div>
           </form>
 
-          {/* SLIDING OVERLAY PANEL */}
+          {}
           <div className={`overlay-panel ${isSignUp ? 'overlay-right' : 'overlay-left'}`}>
             <div className="overlay-content">
               {!isSignUp ? (

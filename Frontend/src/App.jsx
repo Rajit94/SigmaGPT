@@ -17,7 +17,7 @@ function AppContent() {
   const [newChat, setNewChat] = useState(true);
   const [allThreads, setAllThreads] = useState([]);
   
-  // Theme state - FIXED: Initialize from localStorage directly
+  
   const [isLightTheme, setIsLightTheme] = useState(() => {
     const savedTheme = localStorage.getItem('sigmaGPT-theme');
     return savedTheme === 'light';
@@ -28,7 +28,7 @@ function AppContent() {
       const newTheme = !prev;
       localStorage.setItem('sigmaGPT-theme', newTheme ? 'light' : 'dark');
       
-      // Apply theme to HTML element
+      
       if (newTheme) {
         document.documentElement.classList.add('light');
       } else {
@@ -39,7 +39,7 @@ function AppContent() {
     });
   }, []);
 
-  // FIXED: Apply theme class on mount and when theme changes
+  
   useEffect(() => {
     if (isLightTheme) {
       document.documentElement.classList.add('light');
@@ -48,13 +48,13 @@ function AppContent() {
     }
   }, [isLightTheme]);
 
-  // Keyboard shortcut for theme toggle
+  
   useEffect(() => {
     const handleKeyDown = (e) => {
-      // Don't trigger if user is typing in input/textarea
+      
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
       
-      // Ctrl+Shift+L to toggle theme
+      
       if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'l') {
         e.preventDefault();
         toggleTheme();
@@ -76,7 +76,7 @@ function AppContent() {
     toggleTheme
   };
 
-  // Loading state
+  
   if (loading) {
     return (
       <div className={`app ${isLightTheme ? 'light' : ''}`}>
@@ -96,7 +96,7 @@ function AppContent() {
     );
   }
 
-  // Show auth modal if user is not authenticated
+  
   if (!user && authModalOpen) {
     return (
       <div className={`app ${isLightTheme ? 'light' : ''}`}>
@@ -105,7 +105,7 @@ function AppContent() {
     );
   }
 
-  // Main app
+  
   return (
     <div className={`app ${isLightTheme ? 'light' : ''}`}>
       <MyContext.Provider value={providerValues}>
