@@ -5,10 +5,7 @@ import { protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-// PROTECT ALL CHAT ROUTES
-//
 
-//test
 router.post("/test", async(req, res) => {
     try {
         const thread = new Thread({
@@ -24,11 +21,11 @@ router.post("/test", async(req, res) => {
     }
 });
 
-//Get all threads
+
 router.get("/thread", async(req, res) => {
     try {
         const threads = await Thread.find({}).sort({updatedAt: -1});
-        //descending order of updatedAt...most recent data on top
+        
         res.json(threads);
     } catch(err) {
         console.log(err);
@@ -82,7 +79,7 @@ router.post("/chat", async(req, res) => {
         let thread = await Thread.findOne({threadId});
 
         if(!thread) {
-            //create a new thread in Db
+          
             thread = new Thread({
                 threadId,
                 title: message,
